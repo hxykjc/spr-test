@@ -33,6 +33,7 @@ export default function Page({ sections, etag, meta }) {
     <Layout>
       <Head>
         {meta.title && <title>{meta.title[0][0]}</title>}
+        Hello my name is kjc
         {meta.description && (
           <meta name="description" content={meta.description[0][0]} />
         )}
