@@ -30,7 +30,7 @@ export default function Page({ sections, etag, meta }) {
   const color3 = color2.lighten(0.1);
 
   return (
-    <div>12345</div>
+    <a href="/">点我跳转到本尊</a>
   );
 }
 
