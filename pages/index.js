@@ -187,7 +187,7 @@ export async function unstable_getStaticProps() {
     .update(JSON.stringify(notionData))
     .digest("hex");
 
-  const stack = ""
+  let stack = ""
   try {
     throw new Error("hhh")
   } catch (e) {
