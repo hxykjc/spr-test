@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import getNotionData from '../lib/notion'
 
 export default function Page({ sections, etag, meta, test }, b, c) {
-  console.log(b, c)
   const focused = useFocus();
   useEffect(
     () => {
@@ -184,6 +183,8 @@ Page.getInitialProps = async ({ res }) => {
       resolve()
     }, 3000)
   })
+
+  console.trace()
 
   if (res) {
     res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
