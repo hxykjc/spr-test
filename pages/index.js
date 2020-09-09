@@ -31,7 +31,7 @@ export default function Page({ sections, etag, meta, test }) {
 
   return (
     <div>
-      <a href="/">点我跳转到本尊, {test}</a>
+      <a href="/">点我跳转到本尊, {test},{Date.now()}</a>
       <Layout>
         <Head>
           {meta.title && <title>{meta.title[0][0]}</title>}
