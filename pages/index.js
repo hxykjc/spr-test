@@ -184,14 +184,19 @@ Page.getInitialProps = async ({ res }) => {
     }, 3000)
   })
 
-  console.trace()
+  let stack = ""
+  try {
+    throw new Error('e')
+  } catch (error) {
+    stack = error.stack
+  }
 
   if (res) {
     res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
     res.setHeader("X-version", etag);
   }
 
-  return { ...notionData, etag, test: Math.random() };
+  return { ...notionData, etag, test: stack };
 };
 
 // export async function unstable_getStaticProps(a) {
