@@ -187,39 +187,39 @@ Page.getInitialProps = async ({ res }) => {
   return { ...notionData, etag, test:"abcdefg" };
 };
 
-export async function unstable_getStaticProps(a) {
-  const notionData = await getNotionData()
-  const { sections, meta } = notionData
+// export async function unstable_getStaticProps(a) {
+//   const notionData = await getNotionData()
+//   const { sections, meta } = notionData
 
 
-  // await new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     resolve()
-  //   }, 3000)
-  // })
+//   // await new Promise((resolve, reject) => {
+//   //   setTimeout(() => {
+//   //     resolve()
+//   //   }, 3000)
+//   // })
 
-  const etag = require("crypto")
-    .createHash("md5")
-    .update(JSON.stringify(notionData))
-    .digest("hex");
+//   const etag = require("crypto")
+//     .createHash("md5")
+//     .update(JSON.stringify(notionData))
+//     .digest("hex");
 
-  let stack = ""
-  try {
-    throw new Error("hhh")
-  } catch (e) {
-    stack = e.stack
-  }
+//   let stack = ""
+//   try {
+//     throw new Error("hhh")
+//   } catch (e) {
+//     stack = e.stack
+//   }
 
-  return {
-    props: {
-      test: stack,
-      etag,
-      meta,
-      sections,
-    },
-    revalidate: 1
-  }
-};
+//   return {
+//     props: {
+//       test: stack,
+//       etag,
+//       meta,
+//       sections,
+//     },
+//     revalidate: 1
+//   }
+// };
 
 function renderText(title) {
   return title.map(chunk => {
