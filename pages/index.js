@@ -171,33 +171,33 @@ export default function Page({ sections, etag, meta, test }, b, c) {
   );
 }
 
-// Page.getInitialProps = async ({ res }) => {
-//   const notionData = await getNotionData();
-//   const etag = require("crypto")
-//     .createHash("md5")
-//     .update(JSON.stringify(notionData))
-//     .digest("hex");
+Page.getInitialProps = async ({ res }) => {
+  const notionData = await getNotionData();
+  const etag = require("crypto")
+    .createHash("md5")
+    .update(JSON.stringify(notionData))
+    .digest("hex");
 
-//   await new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve()
-//     }, 3000)
-//   })
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 3000)
+  })
 
-//   let stack = ""
-//   try {
-//     throw new Error('e')
-//   } catch (error) {
-//     stack = error.stack
-//   }
+  let stack = ""
+  try {
+    throw new Error('e')
+  } catch (error) {
+    stack = error.stack
+  }
 
-//   if (res) {
-//     res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
-//     res.setHeader("X-version", etag);
-//   }
+  if (res) {
+    res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
+    res.setHeader("X-version", etag);
+  }
 
-//   return { ...notionData, etag, test: stack };
-// };
+  return { ...notionData, etag, test: stack };
+};
 
 export async function unstable_getStaticProps(a) {
   const notionData = await getNotionData()
