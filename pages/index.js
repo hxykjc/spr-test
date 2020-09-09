@@ -4,7 +4,8 @@ import Layout from "../layouts/index";
 import { useState, useEffect } from "react";
 import getNotionData from '../lib/notion'
 
-export default function Page({ sections, etag, meta, test }) {
+export default function Page({ sections, etag, meta, test },b,c) {
+  console.log(b,c)
   const focused = useFocus();
   useEffect(
     () => {
@@ -171,16 +172,31 @@ export default function Page({ sections, etag, meta, test }) {
   );
 }
 
-export async function unstable_getStaticProps() {
+Page.getInitialProps = async ({ res }) => {
+  const notionData = await getNotionData();
+  const etag = require("crypto")
+    .createHash("md5")
+    .update(JSON.stringify(notionData))
+    .digest("hex");
+
+  if (res) {
+    res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
+    res.setHeader("X-version", etag);
+  }
+
+  return { ...notionData, etag, test:"abcdefg" };
+};
+
+export async function unstable_getStaticProps(a) {
   const notionData = await getNotionData()
   const { sections, meta } = notionData
 
 
-  await new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, 3000)
-  })
+  // await new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve()
+  //   }, 3000)
+  // })
 
   const etag = require("crypto")
     .createHash("md5")
