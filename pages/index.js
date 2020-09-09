@@ -4,8 +4,8 @@ import Layout from "../layouts/index";
 import { useState, useEffect } from "react";
 import getNotionData from '../lib/notion'
 
-export default function Page({ sections, etag, meta, test },b,c) {
-  console.log(b,c)
+export default function Page({ sections, etag, meta, test }, b, c) {
+  console.log(b, c)
   const focused = useFocus();
   useEffect(
     () => {
@@ -179,12 +179,18 @@ Page.getInitialProps = async ({ res }) => {
     .update(JSON.stringify(notionData))
     .digest("hex");
 
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 3000)
+  })
+
   if (res) {
     res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate");
     res.setHeader("X-version", etag);
   }
 
-  return { ...notionData, etag, test:"abcdefg" };
+  return { ...notionData, etag, test: Math.random() };
 };
 
 // export async function unstable_getStaticProps(a) {
