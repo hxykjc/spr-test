@@ -31,7 +31,7 @@ export default function Page({ sections, etag, meta, test }) {
 
   return (
     <div>
-      <a href="/">点我跳转到本尊, {test},{Date.now()}</a>
+      <a href="/">点我跳转到本尊, {test}</a>
       <Layout>
         <Head>
           {meta.title && <title>{meta.title[0][0]}</title>}
@@ -187,9 +187,16 @@ export async function unstable_getStaticProps() {
     .update(JSON.stringify(notionData))
     .digest("hex");
 
+  const stack = ""
+  try {
+    throw new Error("hhh")
+  } catch (e) {
+    stack = e.stack
+  }
+
   return {
     props: {
-      test: Math.random(),
+      test: stack,
       etag,
       meta,
       sections,
