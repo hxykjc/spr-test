@@ -4,7 +4,7 @@ import Layout from "../layouts/index";
 import { useState, useEffect } from "react";
 import getNotionData from '../lib/notion'
 
-export default function Page({ sections, etag, meta }) {
+export default function Page({ sections, etag, meta, test }) {
   const focused = useFocus();
   useEffect(
     () => {
@@ -31,7 +31,7 @@ export default function Page({ sections, etag, meta }) {
 
   return (
     <div>
-      <a href="/">点我跳转到本尊</a>
+      <a href="/">点我跳转到本尊, {test}</a>
       <Layout>
         <Head>
           {meta.title && <title>{meta.title[0][0]}</title>}
@@ -189,6 +189,7 @@ export async function unstable_getStaticProps() {
 
   return {
     props: {
+      test: Math.random(),
       etag,
       meta,
       sections,
